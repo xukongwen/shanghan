@@ -26,7 +26,7 @@ data = load_data(10000)
 # Notify the reader that the data was successfully loaded.
 data_load_state.text("完成! (using st.cache)")
 
-
+# 这个貌似是某种万能将数据显示成表格的框架
 df = pd.DataFrame({'col1': [1,2,3]})
 df  # <-- Draw the dataframe
 
