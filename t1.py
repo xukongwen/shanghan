@@ -40,7 +40,8 @@ st.title('试验json')
 
 shdata = json.load(open(os.path.expanduser('./data/SH_ty2.json'), 'r', encoding='utf-8'))
 
-st.json(shdata)
+# st.json(shdata)
 
-
+t2 = pd.DataFrame(shdata)
+t2
 
