@@ -27,11 +27,20 @@ data = load_data(10000)
 data_load_state.text("完成! (using st.cache)")
 
 
+df = pd.DataFrame({'col1': [1,2,3]})
+df  # <-- Draw the dataframe
+
+x = 10
+'x', x  # <-- Draw the string 'x' and then the value of x
+
+
 st.title('试验json')
 
 # 下面这样可以读取和显示json
 
-shdata = json.load(open(os.path.expanduser('~/github/streamlit-example/data/SH_ty2.json'), 'r', encoding='utf-8'))
+shdata = json.load(open(os.path.expanduser('./data/SH_ty2.json'), 'r', encoding='utf-8'))
 
 st.json(shdata)
+
+
 
