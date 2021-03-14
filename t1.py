@@ -14,7 +14,7 @@ st.write(df)
 st.write(alt.Chart(df).mark_bar().encode(x=alt.X('word', sort=None), y='count'))
 
 
-st.title('试验json')
+st.title('经方查询')
 
 # 下面这样可以读取和显示json
 
@@ -46,7 +46,7 @@ if st.button('查询'):
     else:
         st.write("没有找到方剂 '%s'" % fname)
 
-st.title('伤寒论药物用量排名分析(前10名)')
+st.title('伤寒论药物用量排名')
 yao_list = []
 for fang in shdata.values():
     yao_list.extend(fang["方"].keys())
@@ -56,7 +56,7 @@ data = pd.DataFrame({"fname": c.keys(), "fcount": c.values()})
 data.sort_values('fcount', ascending=False, inplace=True)
 st.write(data)
 st.write(alt.Chart(data).mark_bar().encode(x=alt.X('fname', sort=None), y='fcount'))
-
+st.title('伤寒论方剂使用次数排名')
 fang_list = [val['名'] for val in shdata.values()]
 c = collections.Counter(fang_list)
 data = pd.DataFrame({"fname": c.keys(), "fcount": c.values()})
