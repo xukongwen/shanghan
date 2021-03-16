@@ -48,19 +48,26 @@ if st.button('查询'):
     for key in shdata.keys():
         if fname in key:
             fdata = shdata[key]
-            st.text(fdata["方"])
-            st.table(pd.DataFrame(
-            fdata["方"]))
+            td = pd.DataFrame({
+            '药': fdata["方"].keys(),
+            '用量': fdata["方"].values()
+            })
+            td.index = [""] * len(td)
             st.subheader('方劑組成')
+            st.table(td)
+            #st.table(pd.DataFrame(fdata["方"]))
+
 
             st.subheader('對應症狀')
             for i in fdata["证"]["体证"]:
                 st.text(i)
-            st.subheader('六經所在')
-            st.text(fdata["经"])
+
             st.subheader('傷寒原文')
-            st.text(fdata["原文"])
-            #st.markdown("**证:** " + "; ".join(["{}: {}".format(key, ",".join(val)) for key, val in fdata["证"].items()]))
+
+            for i in fdata["原文"].keys():
+                st.text(i)
+            for j in fdata["原文"].values():
+                st.text(j)
             break
     else:
         st.write("没有找到方剂 '%s'" % fname)
