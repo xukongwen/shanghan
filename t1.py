@@ -48,13 +48,15 @@ if st.button('查询'):
     for key in shdata.keys():
         if fname in key:
             fdata = shdata[key]
-            td = pd.DataFrame({
-            '药': fdata["方"].keys(),
-            '用量': fdata["方"].values()
-            })
-            td.index = [""] * len(td)
-            st.subheader('方劑組成')
-            st.table(td)
+            for yao, liang in fdata["方"].items():
+                st.text('{}: {}'.format(yao, liang))
+            # td = pd.DataFrame({
+            # '药': fdata["方"].keys(),
+            # '用量': fdata["方"].values()
+            # })
+            # td.index = [""] * len(td)
+            # st.subheader('方劑組成')
+            # st.table(td)
             #st.table(pd.DataFrame(fdata["方"]))
 
 
@@ -64,13 +66,30 @@ if st.button('查询'):
 
             st.subheader('傷寒原文')
 
-            for i in fdata["原文"].keys():
-                st.text(i)
-            for j in fdata["原文"].values():
-                st.text(j)
+            for key, val in fdata["原文"].items():
+                if isinstance(val, list):
+                    val = ' '.join(val)
+                st.text('{}: {}'.format(key, val))
             break
     else:
         st.write("没有找到方剂 '%s'" % fname)
+
+
+st.title('查询')
+text = st.text_area('输入查询的病症')
+zheng_fang_mapping = {}
+if st.button('查询'):
+    if not zheng_fang_mapping:
+        for fang_info in shdata.values():
+            fang_name = fang_info['名']
+            for zheng in fang_info['证']['体证']:
+                zheng_fang_mapping.setdefault(zheng, []).append(fang_name)
+    zname = text.strip()
+    try:
+        for fname in zheng_fang_mapping[zname]:
+            st.text(fname)
+    except KeyError:
+        st.write("未查到病症 '{}' 对应的药方".format(zname))
 
 
 #=====================
