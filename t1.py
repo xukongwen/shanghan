@@ -75,10 +75,10 @@ if st.button('查询'):
         st.write("没有找到方剂 '%s'" % fname)
 
 
-st.title('查询')
+st.title('病症查询')
 text = st.text_area('输入查询的病症')
 zheng_fang_mapping = {}
-if st.button('查询'):
+if st.button('確定'):
     if not zheng_fang_mapping:
         for fang_info in shdata.values():
             fang_name = fang_info['名']
